@@ -1,11 +1,13 @@
 <script>
-	export let urlInput;
-
+	let urlInput; 
+	let shortUrl;
+	const baseUrl = 'https://go.slit.link/';
 	const handleSubmit = () => {
+		const apiUrl = baseUrl + 'generate';
 		const data = {
 			url: urlInput
 		}
-		fetch('https://0surcchqkg.execute-api.eu-central-1.amazonaws.com/prod/generate', {
+		fetch(apiUrl, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -15,9 +17,10 @@
 		.then(response => response.json())
 		.then(data => {
 			console.log('Success:', data);
+			shortUrl = baseUrl + data.id;
 		})
 		.catch((error) => {
-			console.error('Error:', error);
+			console.warn('Error:', error);
 		});
 	}
 </script>
