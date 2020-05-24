@@ -2,7 +2,23 @@
 	export let urlInput;
 
 	const handleSubmit = () => {
-		alert(urlInput);
+		const data = {
+			url: urlInput
+		}
+		fetch('https://0surcchqkg.execute-api.eu-central-1.amazonaws.com/prod/generate', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log('Success:', data);
+		})
+		.catch((error) => {
+			console.error('Error:', error);
+		});
 	}
 </script>
 
