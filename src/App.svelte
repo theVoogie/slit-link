@@ -1,7 +1,10 @@
 <script>
+	import {clipIt} from "./helpers" 
+
 	let urlInput; 
 	let shortUrl;
 	const baseUrl = 'https://go.slit.link/';
+
 	const handleSubmit = () => {
 		const apiUrl = baseUrl + 'generate';
 		const data = {
@@ -26,7 +29,7 @@
 </script>
 
 <main>
-	<h2>Entered: {urlInput || "none"}!</h2>
+	<h2>Entered: {urlInput || "none"}</h2>
 	<form on:submit|preventDefault={handleSubmit}>
 		<input bind:value={urlInput}>
 		<button disabled={!urlInput} type=submit>
@@ -35,7 +38,8 @@
 	</form>
 	{#if shortUrl}
 		<section>
-			<h1>{shortUrl}</h1>
+			<input id="shortened" readonly value={shortUrl}>
+			<div on:click={() => clipIt("shortened")}>copy</div>
 		</section>
 	{/if}
 </main>
@@ -49,13 +53,24 @@
 	}
 
 	h2 {
-		color: #ff3e00;
+		color: #999999;
 		font-size: 2em;
 		font-weight: 100;
 	}
 
 	form {
 		margin-bottom: 1em;
+	}
+
+	#shortened {
+		width: 60%;
+		color: #333333;
+		font-size: 2.5em;
+		font-weight: 260;
+	}
+
+	#shortened:focus {
+    outline: none;
 	}
 
 	@media (min-width: 640px) {
