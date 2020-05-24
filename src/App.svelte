@@ -33,6 +33,11 @@
 			Submit
 		</button>
 	</form>
+	{#if shortUrl}
+		<section>
+			<h1>{shortUrl}</h1>
+		</section>
+	{/if}
 </main>
 
 <style>
@@ -45,9 +50,12 @@
 
 	h2 {
 		color: #ff3e00;
-		text-transform: uppercase;
 		font-size: 2em;
 		font-weight: 100;
+	}
+
+	form {
+		margin-bottom: 1em;
 	}
 
 	@media (min-width: 640px) {
