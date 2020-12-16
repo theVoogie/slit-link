@@ -1,4 +1,6 @@
 <script>
+	import Header from './Header.svelte'
+	import Footer from './Footer.svelte'
 	import {clipIt, isValidUrl} from "./helpers" 
 
 	let urlInput = ""; 
@@ -31,87 +33,62 @@
 	}
 </script>
 
+<Header />
 <main>
-	<div class="omnio">slit.link</div>
-	<h2 class="omnio">
-		> <span class="fancy-font">{urlInput}</span>
-	</h2>
-	<form on:submit|preventDefault={handleSubmit}>
-		<input class="basic-input" bind:value={urlInput} disabled={!!shortUrl}>
-		<button disabled={!validUrl || !urlInput || !!shortUrl} type=submit>
-			Submit
-		</button>
-	</form>
-	{#if shortUrl}
-		<section>
-			<input id="shortened" class="fancy-font" readonly value={shortUrl}>
-			<div class="copy" on:click={() => clipIt("shortened")}>click to copy</div>
-		</section>
-	{/if}
+	<section>
+		<div class="text-banner">
+			SLIT.LINK is a blazing fast url shortener. It's totally free and each generated link has a lifetime of 5 days. Enjoy!
+		</div>
+		<article>
+			<form on:submit|preventDefault={handleSubmit}>
+				<input class="basic-input" bind:value={urlInput} disabled={!!shortUrl}>
+				<button disabled={!validUrl || !urlInput || !!shortUrl} type=submit>
+					Submit
+				</button>
+			</form>
+			{#if shortUrl}
+				<div class="short-url-container">
+					<input id="shortened" readonly value={shortUrl}>
+					<div class="copy" on:click={() => clipIt("shortened")}>💾</div>
+				</div>
+			{/if}
+		</article>
+	</section>
 </main>
+<Footer />
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
-	
-	* {
-		font-family: Helvetica, sans-serif
+	#short-url-container {
+		width: 100%;
+		padding: 2rem;
+		border: 1px solid red;
 	}
-	main {
-		text-align: center;
-		padding: 2em;
-		max-width: 240px;
+	#shortened {
 		margin: 0 auto;
+		text-align: center;
+		width: 100%;
+		color: #2B2D42;
+		font-size: 2.4em;
+		font-weight: 300;
+		background-color: #f5f7f9;
+		border: none;
+		border-bottom: 1px solid #AAA;
+		border-radius: 0px;
 	}
-
-	.omnio {
-		color: #999999;
-		font-size: 2em;
-		font-weight: 100;
+	#shortened:focus {
+    outline: none;
 	}
-
-	form {
-		margin-bottom: 6em;
-	}
-
-	.fancy-font {
-		font-family: Poppins, Helvetica, sans-serif;
-		font-weight: 100;
-	}
-
-	.basic-input {
-		width: 40%
-	}
-
 	.copy {
+		margin-top: 3rem;
+		text-align: center;
+		font-size: 3.6rem;
 		cursor: pointer;
-		transition: all 200ms cubic-bezier(0.215, 0.610, 0.355, 1)
 	}
-
 	.copy:hover {
 		font-weight: 600;
 	}
-
 	.copy:active {
 		transform: scale(0.8);
 	}
 
-	#shortened {
-		text-align: center;
-		width: 60%;
-		color: #333333;
-		font-size: 2em;
-		font-weight: 300;
-		border: none;
-		border-top: 1px solid #AAA;
-	}
-
-	#shortened:focus {
-    outline: none;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
 </style>
