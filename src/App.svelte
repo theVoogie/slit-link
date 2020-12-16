@@ -1,6 +1,7 @@
 <script>
 	import Header from './Header.svelte'
 	import Footer from './Footer.svelte'
+	import Waves from './Waves.svelte'
 	import {clipIt, isValidUrl} from "./helpers" 
 
 	let urlInput = ""; 
@@ -33,8 +34,8 @@
 	}
 </script>
 
-<Header />
 <main>
+	<Header />
 	<section>
 		<div class="text-banner">
 			SLIT.LINK is a blazing fast url shortener. It's totally free and each generated link has a lifetime of 5 days. Enjoy!
@@ -54,25 +55,26 @@
 			{/if}
 		</article>
 	</section>
+	<Footer />
 </main>
-<Footer />
+<Waves />
 
 <style>
 	#short-url-container {
 		width: 100%;
+		margin-top: 2rem;
 		padding: 2rem;
-		border: 1px solid red;
 	}
 	#shortened {
 		margin: 0 auto;
 		text-align: center;
 		width: 100%;
-		color: #2B2D42;
+		color: #f7f7f7;
 		font-size: 2.4em;
 		font-weight: 300;
-		background-color: #f5f7f9;
+		background-color: transparent;
 		border: none;
-		border-bottom: 1px solid #AAA;
+		border-bottom: 1px solid rgb(214, 214, 214);
 		border-radius: 0px;
 	}
 	#shortened:focus {
