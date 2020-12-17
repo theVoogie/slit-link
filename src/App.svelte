@@ -50,7 +50,12 @@
 			{#if shortUrl}
 				<div class="short-url-container">
 					<input id="shortened" readonly value={shortUrl}>
-					<div class="copy" on:click={() => clipIt("shortened")}>💾</div>
+					<div class="copy" on:click={() => clipIt("shortened")}>
+						<div class="copy-icon">
+							<span class="copy-frame"></span>
+							<span class="copy-frame"></span>
+						</div>
+					</div>
 				</div>
 			{/if}
 		</article>
@@ -60,9 +65,17 @@
 <Waves />
 
 <style>
+
+	.short-url-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 	#shortened {
 		margin: 0 auto;
 		text-align: center;
+		padding: 1rem;
 		width: 100%;
 		color: #f7f7f7;
 		font-size: 2.4em;
@@ -76,16 +89,43 @@
     outline: none;
 	}
 	.copy {
-		margin-top: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 3rem auto;
 		text-align: center;
 		font-size: 3.6rem;
 		cursor: pointer;
 	}
-	.copy:hover {
-		font-weight: 600;
+	.copy-icon {
+		position: relative;
+		width: 6rem;
+		height: 6rem;
+		border-radius: 50%;
+		background-color: #a97ca48a;
+		border: 1px solid #3333338A;
+		transition: transform 180ms ease-in-out;
 	}
-	.copy:active {
-		transform: scale(0.8);
+	.copy-icon:active {
+		transform: scale(0.9);
+	}
+	.copy-frame {
+		position: absolute;
+		width: 2.8rem;
+		height: 3.6rem;
+		border-radius: 4px;
+	}
+	.copy-frame:first-child {
+		bottom: 0.8rem;
+		right: 1.2rem;
+		background-color: #a97ca48a;
+		border: 2px solid #121212df;
+	}
+	.copy-frame:last-child {
+		top: 0.8rem;
+		left: 1.2rem;
+		background-color: #a97ca4;
+		border: 2px solid #121212dc;
 	}
 
 </style>

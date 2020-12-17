@@ -104,6 +104,7 @@ input, button {
 	font-family: Inter, sans-serif;
 	border: 1px solid #ccc;
 	border-radius: 4px;
+	outline: none;
 }
 
 input {
@@ -132,6 +133,15 @@ button:focus {
 }
 
 /* Wave */
+
+@keyframes spin {
+	from {
+			transform:rotate(0deg);
+	}
+	to {
+			transform:rotate(360deg);
+	}
+}
 @keyframes move_wave {
 	0% {
 			transform: translateX(0) translateZ(0) scaleY(1)
@@ -142,6 +152,9 @@ button:focus {
 	100% {
 			transform: translateX(-50%) translateZ(0) scaleY(1)
 	}
+}
+.spinner {
+	animation: 3s ease-in infinite reverse both running spin;
 }
 .waveWrapper {
 	overflow: hidden;
