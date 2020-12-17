@@ -4,10 +4,12 @@
 	import Waves from './Waves.svelte'
 	import {clipIt, isValidUrl} from "./helpers" 
 
-	let urlInput = ""; 
+	let urlInput = "";
 	$: validUrl = isValidUrl(urlInput);
 	$: console.log(" >>> " + urlInput +" >>> validity is: " + validUrl)
 	let shortUrl;
+	let errorMessage;
+
 	const baseUrl = 'https://go.slit.link/';
 
 	const handleSubmit = () => {
@@ -32,6 +34,7 @@
 			console.warn('Error:', error);
 		});
 	}
+
 </script>
 
 <main>
@@ -42,13 +45,13 @@
 		</div>
 		<article>
 			<form on:submit|preventDefault={handleSubmit}>
-				<input class="basic-input" bind:value={urlInput} disabled={!!shortUrl}>
-				<button disabled={!validUrl || !urlInput || !!shortUrl} type=submit>
-					Submit
+				<input class="basic-input" bind:value={urlInput}>
+				<button disabled={!validUrl || !urlInput } type=submit>
+					SLIT
 				</button>
 			</form>
 			{#if shortUrl}
-				<div class="short-url-container">
+				<div class="central-container">
 					<input id="shortened" readonly value={shortUrl}>
 					<div class="copy" on:click={() => clipIt("shortened")}>
 						<div class="copy-icon">
@@ -58,6 +61,11 @@
 					</div>
 				</div>
 			{/if}
+			{#if shortUrl}
+				<div class="central-container">
+					<div class="error-message">{errorMessage}</div>
+				</div>
+			{/if}
 		</article>
 	</section>
 	<Footer />
@@ -65,8 +73,7 @@
 <Waves />
 
 <style>
-
-	.short-url-container {
+	.central-container {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
