@@ -61,7 +61,7 @@
 					</div>
 				</div>
 			{/if}
-			{#if shortUrl}
+			{#if errorMessage}
 				<div class="central-container">
 					<div class="error-message">{errorMessage}</div>
 				</div>
